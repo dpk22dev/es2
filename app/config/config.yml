@@ -70,3 +70,14 @@ jms_di_extra:
         all_bundles: false
         bundles: [AppBundle]
         directories: ["%kernel.root_dir%/../src/"]
+
+monolog:
+    handlers:
+        file:
+            type: stream
+            level: info
+            path: "%kernel.root_dir%/logs/es2.info.log"
+        file:
+            type: stream
+            level: error
+            path: "%kernel.root_dir%/logs/es2.error.log"

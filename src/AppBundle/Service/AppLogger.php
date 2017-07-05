@@ -1,21 +1,21 @@
 <?php
 namespace AppBundle\Service;
 
+
+use Exception;
+use JMS\DiExtraBundle\Annotation as DI;
 use AppBundle\Service\Iface\LoggerIface;
 
 /**
- * @DI\Service("logger")
+ * @DI\Service("app.logger")
  */
-class Logger implements LoggerIface{
+class AppLogger implements LoggerIface{
 
-    private $logger;
+    /** @DI\Inject("logger") */
+    public $logger;
 
-    /**
-     * this has to be in constructor else channelling won't work
-     * @DI\InjectParams({ "logger" = @DI\Inject("logger") })
-     */
-    public function __construct(Logger $logger) {
-        $this->logger = $logger;
+    public function __construct() {
+
     }
 
     public function getLogger()
@@ -43,12 +43,12 @@ class Logger implements LoggerIface{
         $this->logger->warning($message." ".(is_null($e)?"":$e->getMessage().":  ".$e->getTraceAsString()));
     }
 
-    public function err($message, Exception $e=null)
+    public function error($message, Exception $e=null)
     {
         $this->logger->error($message." ".(is_null($e)?"":$e->getMessage().":  ".$e->getTraceAsString()));
     }
 
-    public function crit($message, Exception $e=null)
+    public function critical($message, Exception $e=null)
     {
         $this->logger->critical($message." ".(is_null($e)?"":$e->getMessage().":  ".$e->getTraceAsString()));
     }
