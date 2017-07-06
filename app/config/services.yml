@@ -2,8 +2,12 @@
 # https://symfony.com/doc/current/service_container.html
 parameters:
     #parameter_name: value
+    mongo_host: 127.0.0.1
+    mongo_port: 27017
+    db: aston
+    col_art: articles
 
-services:
-    #service_name:
-    #    class: AppBundle\Directory\ClassName
-    #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
+#services:
+#    mongo.service:
+#        class: AppBundle\Service\MongoService
+#        arguments: ['%mongo_host%', '%mongo_port%']

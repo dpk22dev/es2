@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Service\ArticleManager;
 use JMS\DiExtraBundle\Annotation as DI;
 use AppBundle\Service\AppLogger;
+use AppBundle\Service\MongoService;
 
 class ArticleController extends Controller
 {
@@ -19,6 +20,10 @@ class ArticleController extends Controller
     /** @DI\Inject("app.logger") */
     public $appLogger;
 
+    /** @DI\Inject("mongo.service") */
+    public $mongoSrv;
+
+
     /**
      * @Route("/article/create/{artId}")
      */
@@ -27,6 +32,8 @@ class ArticleController extends Controller
         // replace this example code with whatever you need
         // if artid is empty means request for new article
         $this->appLogger->error('asdf');
+        $mongoClient = $this->mongoSrv->getClient();
+        var_dump($mongoClient);
         return $this->render('article/create.html.twig', array(
             'number' => $this->articleManager->getArtIdFromMDocId( 54 ),
         ));
